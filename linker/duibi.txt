@@ -1,0 +1,6 @@
+-rw-r--r-- 1 lalazhuuby lalazhuuby 3.4K Sep 28 23:52 assembler/fib_baseline_O0.o
+-rwxr-xr-x 1 lalazhuuby lalazhuuby 1.2M Sep 28 23:59 linker/fib_baseline_O0_exec
+-rwxr-xr-x 1 lalazhuuby lalazhuuby 1.2M Sep 28 23:59 linker/fib_baseline_O0_exec
+-rwxr-xr-x 1 lalazhuuby lalazhuuby 1.2M Sep 29 00:02 linker/fib_baseline_O0_static_exec
+-rwxr-xr-x 1 lalazhuuby lalazhuuby 1.2M Sep 29 00:04 linker/fib_baseline_O0_dynamic_exec
+-rwxr-xr-x 1 lalazhuuby lalazhuuby 1.2M Sep 29 00:02 linker/fib_baseline_O0_static_exec

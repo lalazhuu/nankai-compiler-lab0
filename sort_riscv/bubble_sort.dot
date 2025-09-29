@@ -1,0 +1,38 @@
+// bubble_sort.dot
+// bubble_sort 函数的控制流图 (CFG)
+digraph bubble_sort_cfg {
+    // 全局样式设置
+    graph [fontname = "Consolas", splines=ortho];
+    node [shape=box, style=rounded, fontname="Consolas"];
+    edge [fontname = "Helvetica"];
+
+    // 1. 定义基本块节点
+    B_ENTRY [label="ENTRY\l\laddi sp, sp, -48\lsd ra, 40(sp)\l...\lmv s0, a0\lmv s1, a1\lli s2, 0\l"];
+    B_OUTER_LOOP_COND [label="OUTER_LOOP_COND\l.L_outer_loop_start:\l\laddi t0, s1, -1\lbge s2, t0, .L_outer_loop_end\l", style="rounded,filled", fillcolor=lightblue];
+    B_INNER_LOOP_INIT [label="INNER_LOOP_INIT\l\lli s3, 0\l"];
+    B_INNER_LOOP_COND [label="INNER_LOOP_COND\l.L_inner_loop_start:\l\lsub t1, t0, s2\lbge s3, t1, .L_inner_loop_end\l", style="rounded,filled", fillcolor=lightyellow];
+    B_IF_BODY [label="IF_BODY\l\lslli t2, s3, 2\ladd t2, s0, t2\l...\llw t4, 0(t2)\llw t5, 0(t3)\lble t4, t5, .L_skip_swap\l", style="rounded,filled", fillcolor=lightgray];
+    B_SWAP [label="SWAP\l\lsw t5, 0(t2)\lsw t4, 0(t3)\l", style="rounded,filled", fillcolor=lightpink];
+    B_SKIP_SWAP [label="SKIP_SWAP\l.L_skip_swap:\l\laddi s3, s3, 1\lj .L_inner_loop_start\l"];
+    B_OUTER_LOOP_ITER [label="OUTER_LOOP_ITER\l.L_inner_loop_end:\l\laddi s2, s2, 1\lj .L_outer_loop_start\l"];
+    B_EXIT [label="EXIT\l.L_outer_loop_end:\l\lld ra, 40(sp)\l...\laddi sp, sp, 48\lret\l"];
+
+    // 2. 定义控制流边
+    B_ENTRY -> B_OUTER_LOOP_COND;
+
+    B_OUTER_LOOP_COND -> B_INNER_LOOP_INIT [label=" true\n(i < len-1)"];
+    B_OUTER_LOOP_COND -> B_EXIT [label=" false\n(i >= len-1)"];
+
+    B_INNER_LOOP_INIT -> B_INNER_LOOP_COND;
+
+    B_INNER_LOOP_COND -> B_IF_BODY [label=" true\n(j < len-1-i)"];
+    B_INNER_LOOP_COND -> B_OUTER_LOOP_ITER [label=" false\n(j >= len-1-i)"];
+
+    B_IF_BODY -> B_SWAP [label=" true\n(arr[j] > arr[j+1])"];
+    B_IF_BODY -> B_SKIP_SWAP [label=" false\n(arr[j] <= arr[j+1])"];
+    
+    B_SWAP -> B_SKIP_SWAP;
+
+    B_SKIP_SWAP -> B_INNER_LOOP_COND [style=dashed, color=red]; // 内层循环 back-edge
+    B_OUTER_LOOP_ITER -> B_OUTER_LOOP_COND [style=dashed, color=blue]; // 外层循环 back-edge
+}

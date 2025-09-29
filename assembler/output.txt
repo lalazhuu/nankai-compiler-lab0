@@ -1,0 +1,85 @@
+
+assembler/fib_baseline_O0.o:     file format elf64-littleriscv
+
+
+Disassembly of section .text:
+
+0000000000000000 <main>:
+   0:	7179                	addi	sp,sp,-48
+   2:	f406                	sd	ra,40(sp)
+   4:	f022                	sd	s0,32(sp)
+   6:	1800                	addi	s0,sp,48
+   8:	fe042623          	sw	zero,-20(s0)
+   c:	4785                	li	a5,1
+   e:	fef42423          	sw	a5,-24(s0)
+  12:	4785                	li	a5,1
+  14:	fef42223          	sw	a5,-28(s0)
+  18:	fdc40793          	addi	a5,s0,-36
+  1c:	85be                	mv	a1,a5
+  1e:	000007b7          	lui	a5,0x0
+  22:	00078513          	mv	a0,a5
+  26:	00000097          	auipc	ra,0x0
+  2a:	000080e7          	jalr	ra # 26 <main+0x26>
+  2e:	fec42783          	lw	a5,-20(s0)
+  32:	85be                	mv	a1,a5
+  34:	000007b7          	lui	a5,0x0
+  38:	00078513          	mv	a0,a5
+  3c:	00000097          	auipc	ra,0x0
+  40:	000080e7          	jalr	ra # 3c <main+0x3c>
+  44:	872a                	mv	a4,a0
+  46:	000007b7          	lui	a5,0x0
+  4a:	00078593          	mv	a1,a5
+  4e:	853a                	mv	a0,a4
+  50:	00000097          	auipc	ra,0x0
+  54:	000080e7          	jalr	ra # 50 <main+0x50>
+  58:	fe842783          	lw	a5,-24(s0)
+  5c:	85be                	mv	a1,a5
+  5e:	000007b7          	lui	a5,0x0
+  62:	00078513          	mv	a0,a5
+  66:	00000097          	auipc	ra,0x0
+  6a:	000080e7          	jalr	ra # 66 <main+0x66>
+  6e:	872a                	mv	a4,a0
+  70:	000007b7          	lui	a5,0x0
+  74:	00078593          	mv	a1,a5
+  78:	853a                	mv	a0,a4
+  7a:	00000097          	auipc	ra,0x0
+  7e:	000080e7          	jalr	ra # 7a <main+0x7a>
+  82:	a899                	j	d8 <.L2>
+
+0000000000000084 <.L3>:
+  84:	fe842783          	lw	a5,-24(s0)
+  88:	fef42023          	sw	a5,-32(s0)
+  8c:	fe842783          	lw	a5,-24(s0)
+  90:	873e                	mv	a4,a5
+  92:	fec42783          	lw	a5,-20(s0)
+  96:	9fb9                	addw	a5,a5,a4
+  98:	fef42423          	sw	a5,-24(s0)
+  9c:	fe042783          	lw	a5,-32(s0)
+  a0:	fef42623          	sw	a5,-20(s0)
+  a4:	fe442783          	lw	a5,-28(s0)
+  a8:	2785                	addiw	a5,a5,1 # 1 <main+0x1>
+  aa:	fef42223          	sw	a5,-28(s0)
+  ae:	fe842783          	lw	a5,-24(s0)
+  b2:	85be                	mv	a1,a5
+  b4:	000007b7          	lui	a5,0x0
+  b8:	00078513          	mv	a0,a5
+  bc:	00000097          	auipc	ra,0x0
+  c0:	000080e7          	jalr	ra # bc <.L3+0x38>
+  c4:	872a                	mv	a4,a0
+  c6:	000007b7          	lui	a5,0x0
+  ca:	00078593          	mv	a1,a5
+  ce:	853a                	mv	a0,a4
+  d0:	00000097          	auipc	ra,0x0
+  d4:	000080e7          	jalr	ra # d0 <.L3+0x4c>
+
+00000000000000d8 <.L2>:
+  d8:	fdc42783          	lw	a5,-36(s0)
+  dc:	fe442703          	lw	a4,-28(s0)
+  e0:	2701                	sext.w	a4,a4
+  e2:	faf741e3          	blt	a4,a5,84 <.L3>
+  e6:	4781                	li	a5,0
+  e8:	853e                	mv	a0,a5
+  ea:	70a2                	ld	ra,40(sp)
+  ec:	7402                	ld	s0,32(sp)
+  ee:	6145                	addi	sp,sp,48
+  f0:	8082                	ret

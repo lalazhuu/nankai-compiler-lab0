@@ -1,0 +1,62 @@
+// bubble_sort.sy
+// 功能: 读取一系列整数，使用冒泡排序算法将其排序，然后输出结果。
+
+const int MAX_SIZE = 100; // 定义数组的最大容量
+int data_array[MAX_SIZE]; // 用于存储数据的全局数组
+
+/*
+ * 函数名: bubble_sort
+ * 功能: 对数组的前 len 个元素执行冒泡排序（升序）。
+ * 参数: arr[] - 待排序的整数数组
+ *       len   - 数组中有效元素的个数
+ * 返回值: void (无返回值)
+ */
+void bubble_sort(int arr[], int len) {
+    int i = 0;
+    int j = 0;
+    int temp = 0; // 用于交换元素的临时变量
+    
+    // 外层循环控制排序的轮数
+    // 每一轮都会将一个最大的元素“冒泡”到末尾
+    i = 0;
+    while (i < len - 1) {
+        
+        // 内层循环负责比较和交换相邻元素
+        j = 0;
+        while (j < len - 1 - i) {
+            if (arr[j] > arr[j + 1]) {
+                // 如果前一个元素大于后一个，则交换它们
+                temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+            j = j + 1;
+        }
+        
+        i = i + 1;
+    }
+}
+
+/*
+ * 函数名: main
+ * 功能: 程序主入口
+ * 返回值: 0 表示成功
+ */
+int main() {
+    int n = 0; // 存储实际输入的元素个数
+    
+    // 从标准输入读取一串整数到全局数组 data_array 中
+    // getarray 会先读取一个整数 N，然后读取 N 个整数到数组
+    // 返回值就是读取的元素个数 N
+    n = getarray(data_array);
+    
+    // 调用排序函数对数组进行排序
+    bubble_sort(data_array, n);
+    
+    // 输出排序后的数组
+    // putarray 的第一个参数是要输出的元素个数
+    // 第二个参数是要输出的数组
+    putarray(n, data_array);
+    
+    return 0;
+}
